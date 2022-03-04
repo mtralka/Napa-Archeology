@@ -1,14 +1,16 @@
 <script setup>
 import { OnClickOutside } from "@vueuse/components";
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { MAP_STYLES } from "../../utils/defaultSettings";
+import BaseLayerSelect from "../BaseLayerSelect.vue";
+import Popup from "../Popup.vue";
 import DeckGL from "./DeckGL.vue";
 import GeoJsonLayer from "./GeoJsonLayer.vue";
 import Mapbox from "./Mapbox.vue";
-import Popup from "./Popup.vue";
 const accessToken =
   "pk.eyJ1IjoibXRyYWxrYSIsImEiOiJja2VjNm5hdWEwNjQ4MnZ0cHlycXlndnN5In0.mfQAFUPzfGZeMht0EToJBA";
 
+const mapStyle = ref(MAP_STYLES.OUTDOORS);
 const clickedPolygon = reactive({
   show: null,
   id: null,
@@ -26,6 +28,11 @@ const handleClick = ({ info }) => {
   clickedPolygon.y = y;
 };
 
+const handleBaseLayerChange = (event) => {
+  console.log("received", event);
+  mapStyle.value = event;
+};
+
 const GEOJSON_DATA_URL =
   process.env.NODE_ENV === "development"
     ? "https://raw.githack.com/mtralka/CDN/main/napa-archeology-parcels.geojson"
@@ -34,11 +41,9 @@ const GEOJSON_DATA_URL =
 
 <template>
   <div w="full" h="full" class="relative">
+    <BaseLayerSelect @changeLayer="handleBaseLayerChange"> </BaseLayerSelect>
     <DeckGL>
-      <Mapbox
-        :access-token="accessToken"
-        :map-style="MAP_STYLES.OUTDOORS"
-      ></Mapbox>
+      <Mapbox :access-token="accessToken" :map-style="mapStyle"></Mapbox>
       <GeoJsonLayer
         :data="GEOJSON_DATA_URL"
         :pickable="true"

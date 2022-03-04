@@ -36,7 +36,7 @@ onMounted(() => {
     zoom: viewState.zoom,
     bearing: viewState.bearing,
     pitch: viewState.pitch,
-    style: props.mapStyle || MAP_STYLES.dark,
+    style: props.mapStyle || MAP_STYLES.OUTDOORS,
   });
 
   geolocate._updateCamera = () => {};
@@ -49,6 +49,15 @@ watch(
   },
   { deep: true }
 );
+
+watch(
+  () => props.mapStyle,
+  (newStyle, oldStyle) => {
+    map.setStyle(newStyle);
+  },
+  { deep: false }
+);
+
 function handleMapChange(viewState) {
   map.jumpTo({
     center: [viewState.longitude, viewState.latitude],
