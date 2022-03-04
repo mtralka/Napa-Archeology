@@ -41,7 +41,10 @@ import Map from "./components/Map/Map.vue";
       font="bold tracking-tighest"
       text="cyan-50"
     >
-      <p>Made with ❤️ by Matthew</p>
+      <p>
+        Made with ❤️ by
+        <a href="https://tralka.xyz" target="_blank">Matthew</a>
+      </p>
     </footer>
   </div>
 </template>

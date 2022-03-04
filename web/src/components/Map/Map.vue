@@ -29,7 +29,6 @@ const handleClick = ({ info }) => {
 };
 
 const handleBaseLayerChange = (event) => {
-  console.log("received", event);
   mapStyle.value = event;
 };
 
