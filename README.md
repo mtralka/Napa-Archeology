@@ -8,7 +8,7 @@
 
 Napa County, CA identifies public land parcels with potential archeology sites. While this data is *technically* open-source, the information is obfuscated across several data products making it **obtusely difficult** for citizens to locate potential sites for amateur archeological exploration.
 
-Normally, end-users would have to download the public land parcel information [here](https://gis.napa.ca.gov/giscatalog/catalog_xml.asp?srch_opt=all&db_name=x&theme=x&sort_order=layer&meta_style=fgdc&submit=Submit) ([metadata found here](https://gis.napa.ca.gov/giscatalog/viewXML.asp?Name=MAINGIS.GIS.PARCELS_PUBLIC&meta_style=fgdc) and then query each respective public parcel by ASMT (id) code [here](https://www.countyofnapa.org/1935/Parcel-Data-Report). After querying, the interface returns a ~3mb PDF parcel data report which in-part contains information about potential archeology sites. This process is not conducive for efficient field exploration.
+Normally, end-users would have to download the public land parcel information [here](https://gis.napa.ca.gov/giscatalog/catalog_xml.asp?srch_opt=all&db_name=x&theme=x&sort_order=layer&meta_style=fgdc&submit=Submit) ([metadata found here](https://gis.napa.ca.gov/giscatalog/viewXML.asp?Name=MAINGIS.GIS.PARCELS_PUBLIC&meta_style=fgdc)) and then query each respective public parcel by ASMT (id) code [here](https://www.countyofnapa.org/1935/Parcel-Data-Report). After querying, the interface returns a ~3mb PDF parcel data report which in-part contains information about potential archeology sites. This process is not conducive for efficient field exploration.
 
 ## Solution
 
@@ -16,7 +16,7 @@ Leveraging AWS lambda, dynamo db, and S3, I created a serverless pipeline to gen
 
 Following data aquisition, I created a Vue 3 frontend (Vite, WindiCSS, Netlify) to display the aquired information using DeckGL and Mapbox GL. The frontend features user selectable baselayers, per-parcel popups for ASMT IDs, and geolocation services to provide in-the-field reference points.
 
-The overall solution steps are outlined below. Aside from the time required to scrape the report PDFs, this project took under a day from real-world problem identification to finalized product.
+The overall solution steps are outlined below. Aside from the time required to scrape the report PDFs, **this project took under 24 hours from real-world problem identification to finalized product**. It is fully functional but not fully polished.
 
 ## Solution Steps
 
